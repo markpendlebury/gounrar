@@ -11,3 +11,5 @@ go get -v https://github.com/mpendlebury/gounrar
 # Usage
 
 ## TODO
+
+## Credits
