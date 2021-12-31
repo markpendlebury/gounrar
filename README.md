@@ -1,9 +1,7 @@
 # go unrar
+[![Go Reference](https://pkg.go.dev/badge/github.com/markpendlebury/gounrar.svg)](https://pkg.go.dev/github.com/markpendlebury/gounrar)
 
 Work with rar files in go
-
-  
-  
 
 # Install
 ```
