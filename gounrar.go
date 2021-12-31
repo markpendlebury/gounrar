@@ -19,9 +19,7 @@ func RarExtractor(source string, destination string) error {
 		return fmt.Errorf("read: failed to create reader: %v", err)
 	}
 
-	//sum := 1
 	for {
-		//sum += sum
 		header, err := rr.Next()
 		if err == io.EOF {
 			break
@@ -47,6 +45,22 @@ func RarExtractor(source string, destination string) error {
 	}
 
 	return nil
+}
+
+// Get filename(s) from within the Archive
+func GetRarContents(source string) (string, error) {
+
+	rr, err := rardecode.OpenReader(source, "")
+
+	if err != nil {
+		return "", fmt.Errorf("read: failed to create reader: %v", err)
+	}
+
+	header, err := rr.Next()
+	if err == io.EOF {
+		return "", fmt.Errorf("archive is empty: %v", err)
+	}
+	return header.Name, nil
 }
 
 func WriteNewFile(path string, in io.Reader, mode os.FileMode) error {
