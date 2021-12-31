@@ -3,9 +3,7 @@ package unrar
 import (
 	"fmt"
 	"io"
-	"os"
 	"path/filepath"
-	"runtime"
 
 	"github.com/nwaples/rardecode"
 )
@@ -41,9 +39,7 @@ func RarExtractor(source string, destination string) error {
 		if err != nil {
 			return err
 		}
-
 	}
-
 	return nil
 }
 
@@ -61,28 +57,4 @@ func GetRarContents(source string) (string, error) {
 		return "", fmt.Errorf("archive is empty: %v", err)
 	}
 	return header.Name, nil
-}
-
-func WriteNewFile(path string, in io.Reader, mode os.FileMode) error {
-	err := os.MkdirAll(filepath.Dir(path), 0755)
-	if err != nil {
-		return fmt.Errorf("%s: creating directory for file: %v", path, err)
-	}
-
-	out, err := os.Create(path)
-	if err != nil {
-		return fmt.Errorf("%s: creating new file: %v", path, err)
-	}
-	defer out.Close()
-
-	err = out.Chmod(mode)
-	if err != nil && runtime.GOOS != "windows" {
-		return fmt.Errorf("%s: changing file mode: %v", path, err)
-	}
-
-	_, err = io.Copy(out, in)
-	if err != nil {
-		return fmt.Errorf("%s: writing file: %v", path, err)
-	}
-	return nil
 }
