@@ -1,4 +1,4 @@
-package gounrar
+package unrar
 
 import (
 	"fmt"
