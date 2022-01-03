@@ -35,7 +35,7 @@ func RarExtractor(source string, destination string) error {
 			return err
 		}
 
-		err = WriteNewFile(filepath.Join(destination, header.Name), rr, header.Mode())
+		err = writeNewFile(filepath.Join(destination, header.Name), rr, header.Mode())
 		if err != nil {
 			return err
 		}

@@ -17,14 +17,14 @@ func mkdir(path string, dirMode os.FileMode) error {
 	return nil
 }
 
-func CheckExt(filename string) error {
+func checkExt(filename string) error {
 	if !strings.HasSuffix(filename, ".rar") {
 		return fmt.Errorf("filename must have a .rar extension")
 	}
 	return nil
 }
 
-func WriteNewFile(path string, in io.Reader, mode os.FileMode) error {
+func writeNewFile(path string, in io.Reader, mode os.FileMode) error {
 	err := os.MkdirAll(filepath.Dir(path), 0755)
 	if err != nil {
 		return fmt.Errorf("%s: creating directory for file: %v", path, err)
